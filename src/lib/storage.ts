@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { isValidDateStr } from './dates';
 import { normalizeIntervals } from './schedule';
-import { DEFAULT_SETTINGS, type AppData, type Item } from './types';
+import { DEFAULT_SETTINGS, type AppData, type Item, type ReminderSettings } from './types';
 
 const STORAGE_KEY = 'spaced-app/data/v1';
 
@@ -24,6 +24,14 @@ function sanitizeItem(raw: any): Item | null {
   };
 }
 
+function sanitizeReminder(raw: any): ReminderSettings {
+  const def = DEFAULT_SETTINGS.reminder;
+  if (!raw || typeof raw !== 'object') return def;
+  const hour = Number.isInteger(raw.hour) && raw.hour >= 0 && raw.hour < 24 ? raw.hour : def.hour;
+  const minute = Number.isInteger(raw.minute) && raw.minute >= 0 && raw.minute < 60 ? raw.minute : def.minute;
+  return { enabled: raw.enabled === true, hour, minute };
+}
+
 /** Validates data loaded from storage or pasted by the user as a backup. */
 export function parseData(json: string): AppData {
   const raw = JSON.parse(json);
@@ -39,6 +47,7 @@ export function parseData(json: string): AppData {
     settings: {
       intervals: intervals.length ? intervals : DEFAULT_SETTINGS.intervals,
       mode: settingsRaw.mode === 'fromPrevious' ? 'fromPrevious' : 'fromLearned',
+      reminder: sanitizeReminder(settingsRaw.reminder),
     },
   };
 }

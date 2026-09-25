@@ -2,6 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { Alert, Pressable, Share, Text, View } from 'react-native';
 
+import { ReminderSettings } from '@/components/reminder-settings';
 import { Button, Card, Hint, Input, IntervalsEditor, Label, Row, Screen, SectionTitle } from '@/components/ui';
 import { addDays, formatShort } from '@/lib/dates';
 import { getStatus } from '@/lib/schedule';
@@ -80,6 +81,9 @@ export default function SettingsScreen() {
 
   return (
     <Screen>
+      <SectionTitle>Напоминания</SectionTitle>
+      <ReminderSettings />
+
       <SectionTitle>Интервалы повторений</SectionTitle>
       <Card>
         <Hint>

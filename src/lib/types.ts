@@ -25,9 +25,16 @@ export interface Item {
   createdAt: number;
 }
 
+export interface ReminderSettings {
+  enabled: boolean;
+  hour: number;
+  minute: number;
+}
+
 export interface Settings {
   intervals: number[];
   mode: ScheduleMode;
+  reminder: ReminderSettings;
 }
 
 export interface AppData {
@@ -40,4 +47,5 @@ export const DEFAULT_INTERVALS = [1, 3, 5, 7, 10, 14, 21, 30, 60];
 export const DEFAULT_SETTINGS: Settings = {
   intervals: DEFAULT_INTERVALS,
   mode: 'fromLearned',
+  reminder: { enabled: false, hour: 9, minute: 0 },
 };

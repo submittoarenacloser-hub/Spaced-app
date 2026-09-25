@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { AppState } from 'react-native';
 
 import { todayStr } from './dates';
+import { requestReminderSync } from './notifications';
 import { getStatus, normalizeIntervals, reviewsToMark } from './schedule';
 import { EMPTY_DATA, loadData, saveData } from './storage';
 import type { AppData, Item, Settings } from './types';
@@ -70,6 +71,13 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (loaded) saveData(data).catch(() => {});
   }, [data, loaded]);
+
+  // Reschedule reminders after changes settle (e.g. typing a title updates data on every key).
+  useEffect(() => {
+    if (!loaded) return;
+    const timer = setTimeout(() => requestReminderSync(data.items, data.settings, today), 800);
+    return () => clearTimeout(timer);
+  }, [data, loaded, today]);
 
   const mapItem = useCallback((id: string, fn: (item: Item, d: AppData) => Item) => {
     setData((d) => ({ ...d, items: d.items.map((it) => (it.id === id ? fn(it, d) : it)) }));
