@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { Text, View } from 'react-native';
 
 import { ItemCard } from '@/components/item-card';
-import { Empty, Fab, Hint, Screen, SectionTitle } from '@/components/ui';
+import { Button, Card, Empty, Fab, Hint, Screen, SectionTitle } from '@/components/ui';
 import { formatLong, formatShort, plural, relativeLabel } from '@/lib/dates';
 import { buildPlan, getNextActionDate, getStatus } from '@/lib/schedule';
 import { useStore } from '@/lib/store';
@@ -59,6 +59,17 @@ export default function TodayScreen() {
               <ItemCard key={it.id} item={it} action />
             ))}
           </>
+        )}
+
+        {items.length === 0 && (
+          <Card style={{ backgroundColor: c.primarySoft, borderColor: c.primarySoft }}>
+            <Text style={{ color: c.text, fontSize: 18, fontWeight: '800' }}>Добро пожаловать!</Text>
+            <Hint>
+              Узнайте за пару минут, что такое интервальное повторение, почему оно работает и как
+              пользоваться приложением.
+            </Hint>
+            <Button title="Как это работает" icon="help-circle-outline" onPress={() => router.push('/guide')} />
+          </Card>
         )}
 
         {toLearn.length + toReview.length === 0 && (

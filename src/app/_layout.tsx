@@ -29,6 +29,7 @@ function RootStack() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="add" options={{ title: 'Новый блок', presentation: 'modal' }} />
       <Stack.Screen name="item/[id]" options={{ title: 'Блок' }} />
+      <Stack.Screen name="guide" options={{ title: 'Как это работает' }} />
     </Stack>
   );
 }

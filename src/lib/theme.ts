@@ -15,6 +15,8 @@ const light = {
   dangerSoft: '#FEE2E2',
   warning: '#B45309',
   warningSoft: '#FEF3C7',
+  chartForget: '#EA580C',
+  chartRemember: '#4F46E5',
 };
 
 const dark: typeof light = {
@@ -32,6 +34,8 @@ const dark: typeof light = {
   dangerSoft: '#3B1717',
   warning: '#FBBF24',
   warningSoft: '#3A2C0C',
+  chartForget: '#EA580C',
+  chartRemember: '#6366F1',
 };
 
 export type Colors = typeof light;

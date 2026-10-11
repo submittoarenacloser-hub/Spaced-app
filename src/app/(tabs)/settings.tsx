@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, Share, Text, View } from 'react-native';
 
@@ -81,6 +82,13 @@ export default function SettingsScreen() {
 
   return (
     <Screen>
+      <Button
+        title="Как это работает — инструкция"
+        icon="help-circle-outline"
+        variant="secondary"
+        onPress={() => router.push('/guide')}
+      />
+
       <SectionTitle>Напоминания</SectionTitle>
       <ReminderSettings />
 

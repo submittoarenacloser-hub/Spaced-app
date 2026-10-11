@@ -10,7 +10,8 @@
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.spacedapp.repetition",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +21,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.spacedapp.repetition"
+      "package": "com.spacedapp.repetition",
+      "versionCode": 1
     },
     "web": {
       "output": "static",
@@ -33,7 +35,7 @@
         {
           "backgroundColor": "#4F46E5",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 120
         }
       ],
       [
